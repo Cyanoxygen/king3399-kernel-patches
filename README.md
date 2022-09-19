@@ -24,7 +24,7 @@ find . -type f -exec install -D {} ../linux-5.19.9/{} \;
 popd
 
 pushd linux-5.19.9
-patch -p1 < ../king3399-kernel-patches/0000-0000-source-rongpin-and-enable-rt5651.patch
+find ../king3399-kernel-patches -name '*.patch' -print0 | xargs -0 patch -p1
 popd
 ```
 
