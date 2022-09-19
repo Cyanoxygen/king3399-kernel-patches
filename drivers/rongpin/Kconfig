@@ -1,0 +1,56 @@
+
+menuconfig RONGPIN
+	default n
+	bool "Rongpin board specific hardware support"
+	help
+		This section of menu enables support for Rongpin RK3399 boards.
+		If you are compiling the kernel for Rongpin board with RK3399, you probably want to say Y here.
+		From cyan: If the following destroys your board, don't blame me for this.
+		Use it at your own risk.
+
+if RONGPIN
+
+config RONGPIN_RP_POWER
+	tristate "Rongpin Power Control Module support"
+	default y
+	help 
+		This enables support for the onboard fan, LEDs, etc., according to the device tree they provided.
+		So in order to make the fan spin, make the LED light up, you should say Y here.
+
+# The following two are for Android, we probably don't need this.
+
+# config RONGPIN_RP_WAKE_LOCK
+# 	tristate "rongpin rp_wake_lock support"
+# 	default y
+# 	help 
+# 		rp_wakelock
+
+# config RONGPIN_RP_CONFIG
+# 	tristate "rpdzkj config"
+# 	default y
+# 	help
+# 		rpdzkj config
+		
+config RONGPIN_RP_GPIO
+	tristate "Rongpin GPIO Module Driver"
+	default y
+	help
+		This enables the GPIO headers on the Rongpin board.
+		You should say Y here if you want to control GPIO pins all over your board.
+
+config RONGPIN_RP_LED
+	tristate "Rongpin LED Driver"
+	default n
+	help
+		This enables the onborad LED on the Rongpin board.
+		You should say Y here if you want to control the onboard LED from /proc.
+		WARN - Untested, default to N. LEDs should be exposed by rp_power.
+
+config RONGPIN_STM706
+	default y
+	tristate "Rongpin STM706 Driver"
+	help
+		From cyan: I surely enough don't know what it does. The config in 4.4 kernel left it enabled,
+		so we should enable it here.
+
+endif # RONGPIN
