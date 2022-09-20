@@ -1,7 +1,0 @@
---- ./linux-5.19.9/arch/arm64/boot/dts/rockchip/Makefile        2022-09-19 19:34:20.632820804 +0800
-+++ ./linux-5.19.9-rongpin/arch/arm64/boot/dts/rockchip/Makefile        2022-09-19 18:01:23.060970789 +0800
-@@ -65,3 +65,4 @@
- dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-bpi-r2-pro.dtb
- dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-evb1-v10.dtb
- dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-rock-3a.dtb
-+dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-king3399.dtb

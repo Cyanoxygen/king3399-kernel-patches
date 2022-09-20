@@ -1,0 +1,13 @@
+diff --git a/sound/soc/codecs/Kconfig b/sound/soc/codecs/Kconfig
+index 6165db92a..9c265337a 100644
+--- a/sound/soc/codecs/Kconfig
++++ b/sound/soc/codecs/Kconfig
+@@ -1310,7 +1310,7 @@ config SND_SOC_RT5645
+ 	depends on I2C
+ 
+ config SND_SOC_RT5651
+-	tristate
++	tristate "Realtek RT5651 Codec"
+ 	depends on I2C
+ 
+ config SND_SOC_RT5659
