@@ -1,5 +1,13 @@
 # Rongpin board specific driver for mainline Linux kernel
 
+Status
+======
+
+- [x] Out-of-tree kernel modules which brings up LED and the fan
+- [x] Wi-Fi
+- [ ] Bluetooth
+- [x] Sound (Sound card can be detected but can not play sound)
+
 Installation
 ======
 
