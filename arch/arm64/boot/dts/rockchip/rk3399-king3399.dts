@@ -6,26 +6,29 @@
 / {
 
 	model = "Jesus King3399";
-	compatible = "rockchip,rk3399-excavator-linux", "rockchip,rk3399";
+	compatible = "jesus,king3399","rongpin,king3399","rockchip,rk3399-excavator-linux", "rockchip,rk3399";
 
-	sound {
+	rt5651-sound {
 		compatible = "simple-audio-card";
-		simple-audio-card,format = "i2s";
 		simple-audio-card,name = "realtek,rt5651-codec";
-		simple-audio-card,mclk-fs = <256>;
 		simple-audio-card,widgets =
 			"Microphone", "Mic Jack",
 			"Headphone", "Headphone Jack";
 		simple-audio-card,routing =
-			"Mic Jack", "MICBIAS1",
+			"Mic Jack", "micbias1",
 			"IN1P", "Mic Jack",
 			"Headphone Jack", "HPOL",
 			"Headphone Jack", "HPOR";
-		simple-audio-card,cpu {
-			sound-dai = <&i2s0>;
-		};
-		simple-audio-card,codec {
-			sound-dai = <&rt5651>;
+		
+		simple-audio-card,dai-link {
+			format = "i2s";
+			mclk-fs = <256>;
+			i2s0_dai: cpu {
+				sound-dai = <&i2s0>;
+			};
+			rt5651_dai: codec {
+				sound-dai = <&rt5651>;
+			};
 		};
 	};
 
@@ -82,8 +85,6 @@
 			gpio_function = <0>;	    //0:output，1:input
 		};
 	};
-
-
 
 	vcc5v0_sys: vcc5v0-sys {
 		compatible = "regulator-fixed";
@@ -392,15 +393,15 @@
 	i2c-scl-rising-time-ns = <300>;
 	i2c-scl-falling-time-ns = <15>;
 
-	rt5651: rt5651@1a {
+	rt5651: codec@1a {
 		#sound-dai-cells = <0>;
 		compatible = "realtek,rt5651";
 		reg = <0x1a>;
 		clocks = <&cru SCLK_I2S_8CH_OUT>;
 		clock-names = "mclk";
-		pinctrl-names = "default";
-		pinctrl-0 = <&i2s_8ch_mclk_pin>;
-		spk-con-gpio = <&gpio0 11 GPIO_ACTIVE_HIGH>;
+		// pinctrl-names = "default";
+		// pinctrl-0 = <&i2s_8ch_mclk_pin>;
+		// spk-con-gpio = <&gpio0 11 GPIO_ACTIVE_HIGH>;
 		hp-det-gpio = <&gpio4 28 GPIO_ACTIVE_LOW>;
 	};
 };
@@ -418,6 +419,7 @@
 };
 
 &i2s0 {
+	#sound-dai-cells = <0>;
 	rockchip,playback-channels = <8>;
 	rockchip,capture-channels = <8>;
 	status = "okay";
@@ -437,11 +439,13 @@
 };
 
 &pinctrl {
+	/*
 	i2s1 {
 		i2s_8ch_mclk_pin: i2s-8ch-mclk-pin {
 			rockchip,pins = <4 RK_PA0 1 &pcfg_pull_none>;
 		};
 	};
+	*/
 	fusb30x {
 		fusb0_int: fusb0-int {
 			rockchip,pins = <1 2 RK_FUNC_GPIO &pcfg_pull_up>;
